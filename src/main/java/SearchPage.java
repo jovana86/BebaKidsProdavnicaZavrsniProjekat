@@ -8,31 +8,42 @@ public class SearchPage extends BasePage{
     WebDriver driver = null;
 
     //WebElementi
-//    @FindBy(xpath = "//form[@id='filter_form']//label[@class='icheck-label icheck[qdovq]']")
-//    @FindBy(xpath = "//div[@class='icheckbox_flat icheck-item icheck[az2fo]']")
-//            @FindBy(xpath = "//div[@class='filter-group  ']//label[@class='icheck-label icheck[az2fo]']")
+
     @FindBy(xpath = "//label[contains(@for,'5_zenski')]")
     WebElement filterPolZenski;
 
-//    @FindBy(xpath = "//ul[@class='items-wrapper']//div[@class='icheckbox_flat icheck-item icheck[ctu2a] checked']")
-   @FindBy(xpath = "//ul[@class='items-wrapper']//input[contains(@checked,'checked')]")
+    @FindBy(xpath = "//ul[@class='items-wrapper']//input[contains(@checked,'checked')]")
     WebElement filterPolZenskiOznacen;
 
     @FindBy(id = "f_eusize_04")
     WebElement filterVelicina4;
 
-        @FindBy (id = "f_pricelist_2000")
-         //   @FindBy(xpath = "//ul[@class='items-wrapper']//label[@class='icheck-label icheck[6zc6u]']")
+    @FindBy (id = "f_pricelist_2000")
     WebElement filterCena1501Do2000;
-        @FindBy(id = "f_pricelist_3500")
-        WebElement filterCena3001Do3500;
+
+    @FindBy(id = "f_pricelist_3500")
+    WebElement filterCena3001Do3500;
 
     @FindBy(xpath = "//div[text()='Reč ili fraza: haljina']")
     WebElement pretragaHaljinaOznacena;
 
-    @FindBy(xpath = "//div[text()='zenski ']")
+    @FindBy(xpath = "//div[contains(@nb-value,'zenski')]")
     WebElement pretragaFilterZenskiOznacen;
 
+    @FindBy(xpath = "//div[text()='Reč ili fraza: haljina']")
+    WebElement pretragaFilterHaljinaOznacen;
+
+    @FindBy(xpath ="//div[text()='04']")
+    WebElement pretragaFilterVelicina04Oznacen;
+
+    @FindBy(xpath = "//div[text()='3.001 - 3.500 RSD']")
+    WebElement pretragaFilterCena2501Do3000Oznacen;
+
+    @FindBy(id = "sort")
+    WebElement dropdownSortiraj;
+
+    @FindBy(xpath = "//select[@id='sort']//option[text()='Najjeftinije prvo']")
+    WebElement dropdownSortirajNajjeftinijePrvo;
 
 
 
@@ -96,11 +107,36 @@ public class SearchPage extends BasePage{
 
     }
 
-    public void daLiJePolZenskiOznacenUPretraziFiltera(){
-        waitForElement ( pretragaFilterZenskiOznacen );
-        print ( "Da li se pol zenski pojavio kao filter u blok tagu" );
-        assert isElementPresent ( pretragaFilterZenskiOznacen ):"Error. Filter zenski pol nije prikazan ";
 
+
+    public void daLiJePolZenskiOznacenUBlokTagu(){
+        print ( "Da li se pol zenski pojavio kao filter u blok tagu" );
+        assert isElementPresent ( pretragaFilterZenskiOznacen ):"Error. Filter zenski pol nije prikazan.";
+
+    }
+    public void daLiJeHaljinaOznacenaUBlokTagu(){
+        print ( "Da li se rec haljina pojavljuje kao filter u blok tagu" );
+        assert isElementPresent ( pretragaFilterHaljinaOznacen ):"Error. Filter haljina nije prikazan.";
+    }
+
+    public void daLiJeVelicina04UBlokTagu(){
+        print ( "Da li se velicina 04 pojavljuje kao filter u blok tagu" );
+        assert isElementPresent ( pretragaFilterVelicina04Oznacen ):"Error. Filter Velicina 04 nije prikazan.";
+    }
+
+    public void daLiJeCena2501Do3000UBlokTagu(){
+        print ( "Da li se cena od 2501 do 3000 pojavljuje kao filter u blok tagu" );
+        assert isElementPresent ( pretragaFilterCena2501Do3000Oznacen ):"Error. Filter Cena 2501 do 3000 nije prikazan.";
+    }
+
+    public void dropdownSortirajClick(){
+        assert isElementPresent ( dropdownSortiraj ):"Error. Dropdown menu is not present.";
+        dropdownSortiraj.click ();
+    }
+
+    public void dropdownSortirajNajjeftinijePrvoClick(){
+        assert isElementPresent ( dropdownSortirajNajjeftinijePrvo ):"Error. Dropdown menu is not present.";
+        dropdownSortirajNajjeftinijePrvo.click ();
     }
 
 

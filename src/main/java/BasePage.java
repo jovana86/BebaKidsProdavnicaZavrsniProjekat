@@ -34,9 +34,14 @@ public class BasePage {
      @FindBy(className = "register-btn")
      WebElement registracijaButton;
 
+     @FindBy(className = "login-btn")
+     WebElement prijaviteSeButton;
 
 
 
+//Registration modal id = "registration_modal"
+    // poruka  class = alert alert-success get text
+    ////da se ugasi modal xpath = "form[@id='registration_modal']//button[@class='close']"
 
     //Konstruktor
 
@@ -87,8 +92,13 @@ public class BasePage {
     }
 
     public void clickRegistracijaButton(){
-        assert isElementPresent ( registracijaButton );
+        assert isElementPresent ( registracijaButton ):"Error. Registracija button is not present.";
         registracijaButton.click ();
+    }
+
+    public void clickLoginButton(){
+        assert isElementPresent ( prijaviteSeButton ):"Error. Login Button is not present.";
+        prijaviteSeButton.click ();
     }
 
 
@@ -123,7 +133,7 @@ public class BasePage {
     //opsta metoda za cekanje bilo kog webelementa
     public void waitForElement(WebElement element){
         WebDriverWait wait = new WebDriverWait ( driver,15 );
-        wait.until( ExpectedConditions.visibilityOf (element) );
+        wait.until( ExpectedConditions.visibilityOf(element) );
     }
 
 
