@@ -7,6 +7,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+
 public class BasePage {
     WebDriver driver=null;
 
@@ -132,8 +134,8 @@ public class BasePage {
     }
     //opsta metoda za cekanje bilo kog webelementa
     public void waitForElement(WebElement element){
-        WebDriverWait wait = new WebDriverWait ( driver,15 );
-        wait.until( ExpectedConditions.visibilityOf(element) );
+        WebDriverWait wait = new WebDriverWait ( driver, 15 );
+        wait.until( ExpectedConditions.visibilityOf (element) );
     }
 
 

@@ -1,8 +1,11 @@
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage extends BasePage {
     WebDriver driver = null;
@@ -40,16 +43,16 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//li[text()='Unesite validan email.']")
     WebElement errorPorukaZaPrijavuSaNevalidnimKredencijalima;
 
-   @FindBy(xpath = "//div[@class='modal-body']//ul[@id='parsley-id-8544']//li[text()='Ovo polje je obavezno.']")
-    //@FindBy(xpath = "ul[@id='parsley-id-8544']")
-    WebElement errorPorukaZaPrazanEmail;
-
-    @FindBy(xpath = "//div[@class='modal-body']//ul[@id='parsley-id-2591']//li[text()='Ovo polje je obavezno.']")
-    //@FindBy(xpath = "ul[@id='parsley-id-2591']")
-    WebElement errorPorukaZaPraznuLozinku;
-
     @FindBy(xpath = "//div[@class='alert alert-danger']")
     WebElement errorAlertZaPogresnuLozinku;
+
+    @FindBy(id = "modal_lost_password_form")
+    WebElement modalZaboravljenaLozinka;
+
+    @FindBy(xpath = "//form[@class='lost_password_form']//button[@class='close']")
+    WebElement zatvoriModalZaboravljenaLozinkaButton;
+
+
 
 
 
@@ -90,6 +93,17 @@ public class LoginPage extends BasePage {
         assert isElementPresent ( loginPrijava ):"Error. Login Modal is not open.";
         loginPrijava.click ();
     }
+    public void zaboraviliSteLozinkuClick(){
+
+        assert isElementPresent ( zaboraviliSteLozinku ):"Error. Login modal is not open.";
+        print("Otvori modal Zaboravljena lozinka i verifikuj da je modal otvoren");
+        zaboraviliSteLozinku.click ();
+        assert isElementPresent ( zatvoriModalZaboravljenaLozinkaButton ):"Error. Modal Zaboravljena Lozinka is not open.";
+//        sleep ();
+        print ( "Zatvori modal zaboravljena lozinka" );
+        zatvoriModalZaboravljenaLozinkaButton.click ();
+    }
+
     public void profilKorisnikaPrisutanNaStranici(){
         //waitForElement ( profilKorisnika );
          assert isElementPresent ( profilKorisnika ):"Error. You are not logged in.";
@@ -103,12 +117,8 @@ public class LoginPage extends BasePage {
     public void daLiJePrisutnaErrorPorukaZaPrijavuSaNevalidnimKredencijalima(){
         assert isElementPresent ( errorPorukaZaPrijavuSaNevalidnimKredencijalima ):"Error. Error message is not shown.";
     }
-    public void daLiJePrisutnaErrorPorukaZaPrijavuBezEmailAdrese(){
-        assert isElementPresent ( errorPorukaZaPrazanEmail ):"Error. Error message is not shown.";
-    }
-    public void daLiJePrisutnaErrorPorukaZaPrijavuBezLozinke(){
-        assert isElementPresent ( errorPorukaZaPraznuLozinku ):"Error. Error message is not shown.";
-    }
+
+
     public void daLiJeErrorAlertPrisutan(){
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript ( "arguments[0].scrollIntoView();", errorAlertZaPogresnuLozinku );

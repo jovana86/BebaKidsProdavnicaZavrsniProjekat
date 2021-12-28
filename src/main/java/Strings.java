@@ -18,8 +18,7 @@ public class Strings {
 
     public static final String LOGIN_EMAIL = "basaric.jovana9@gmail.com";
     public static final String LOGIN_LOZINKA = "babaVanga";
-    public static final String LOGIN_NEVALIDNI_EMAIL = "basaric.jovana9@gmail.com";
-    public static final String LOGIN_NEVALIDNA_LOZINKA = "babaVanga";
+
 
 
 

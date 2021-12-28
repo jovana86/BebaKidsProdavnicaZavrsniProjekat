@@ -1,3 +1,4 @@
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 public class LoginTest extends BaseTest{
@@ -84,8 +85,10 @@ public class LoginTest extends BaseTest{
 
     }
 
+
+
     /**
-     * Prijava na stranicu sa nevalidnim kredencijalima
+     * Prijava na stranicu sa Validnom Email Adresom i nevalidnom lozinkom
      *
      * Test steps:
      * 1. Navigiraj na bebakids.com
@@ -120,27 +123,81 @@ public class LoginTest extends BaseTest{
             driver.quit ();
         }
     }
+    /**
+     * Prijava na stranicu sa nevalidnom Email adresom i validnom lozinkom
+     *
+     * Test steps:
+     * 1. Navigiraj na bebakids.com
+     * 2. U gornjem desnom delu headera klikni dugme PRIJAVITE SE
+     * 3. Kada se pojavi modal za prijavu, polje Email popuniti nevalidnim podacima("tanglbangl),
+     * polje Lozinka popuniti validnim podacima
 
-//    @Test
-//    public void prijavaBezKredencijalaTest(){
-//        driver = openChromeDriver ();
-//        try {
-//            print ( "Navigiraj na bebakids.com" );
-//            LoginPage loginPage = new LoginPage ( driver );
-//
-//            print ( "Bez unosa kredencijala potvrdi prijavu" );
-//            loginPage.prijaviteSeButtonClick ();
-//            loginPage.loginPrijavaClick ();
-//
-//
-//            loginPage.daLiJePrisutnaErrorPorukaZaPrijavuBezEmailAdrese ();
-//            loginPage.daLiJePrisutnaErrorPorukaZaPrijavuBezLozinke ();
-//
-//
-//
-//        }finally {
-//            driver.quit ();
-//        }
-//    }
+     * 4. Kliknuti dugme PRIJAVA
+     *
+     * Expected result:
+     * 1. Error poruka ispod polja Email: "Unesite validan email."
+     */
+
+    @Test
+    public void prijavaSaNevalidnomEmailAdresomIValidnomLozinkom(){
+        driver = openChromeDriver ();
+        try {
+            print ( "Navigiraj na bebakids.com" );
+            LoginPage loginPage = new LoginPage ( driver );
+
+            print ( "Unesi nevalidan Email i validnu Lozinku" );
+            loginPage.prijaviteSeButtonClick ();
+            loginPage.unesiNevalidanEmail ();
+            loginPage.unesiLoginLozinka ();
+
+            print ( "Potvrdi prijavu na sajt i verifikuj error alert" );
+            loginPage.loginPrijavaClick ();
+            loginPage.daLiJePrisutnaErrorPorukaZaPrijavuSaNevalidnimKredencijalima ();
+
+
+        }finally {
+            driver.quit ();
+        }
+    }
+    /**
+     * Prijava na stranicu sa nevalidnom Email adresom i validnom lozinkom
+     *
+     * Test steps:
+     * 1. Navigiraj na bebakids.com
+     * 2. U gornjem desnom delu headera klikni dugme PRIJAVITE SE
+     * 3. Kada se pojavi modal za prijavu, polje Email popuniti validnim podacima,
+     * polje Lozinka popuniti nevalidnim podacima
+     * 4. Kliknuti dugme PRIJAVA
+     * 5. verifikuj Error Alert: "Pogrešna email adresa ili lozinka. Molimo Vas pokušajte ponovo!"
+     * 6. Klikni dugme Zaboravili ste lozinku i verifikuj da se modal pojavio
+     *
+     */
+
+    @Test
+    public void zaboraviliSteLozinkuTest(){
+        driver = openChromeDriver ();
+        try {
+            print ( "Navigiraj na bebakids.com" );
+            LoginPage loginPage = new LoginPage ( driver );
+
+            print ( "Unesi validan Email i nevalidnu lozinku i klikni Prijava" );
+            loginPage.prijaviteSeButtonClick ();
+            loginPage.unesiLoginEmail ();
+            loginPage.unesiNevalidnuLozinku ();
+            loginPage.loginPrijavaClick ();
+            loginPage.sleep ();
+            print ( "Verifikuj da je Error Alert prisutan" );
+            loginPage.daLiJeErrorAlertPrisutan ();
+
+            print ( "Klikni zaboravili ste lozinku i verifikuj da se modal pojavio" );
+            loginPage.zaboraviliSteLozinkuClick ();
+
+
+        }finally {
+            driver.quit ();
+        }
+    }
+
+
 
 }
