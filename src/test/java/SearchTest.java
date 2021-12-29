@@ -43,40 +43,15 @@ public class SearchTest extends BaseTest{
            searchPage.daLiJeVelicina04UBlokTagu ();
            searchPage.daLiJeCena2501Do3000UBlokTagu ();
 
-
-//            List<WebElement> list= driver.findElements ( By.xpath ( "//div[@class='block products-listing product product-listing-items ']//div[@class='row']" ) );
- //          List<WebElement> list = driver.findElements ( By.className ( "item-data col-xs-12" ) );
-//          //  List<WebElement> list = driver.findElements (By.xpath ( "//div[@class='item-data col-xs-12']" ));
-//           // List<WebElement> list = driver.findElements (By.className ( "wrapper-grid-view item product-item ease col-xs-6 col-sm-4 col-md-3 col-lg-3 grid-view   appeared" ));
-//            ArrayList<String> listaDobijenihProizvoda= new ArrayList<>();
- //          for (WebElement e: list){
-//               String nazivProizvoda = e.findElement ( By.xpath ( "//div[@class='item-data col-xs-12']//div[@class='title']" ) ).getText ();
-//               // String nazivProizvoda = e.findElement ( By.className ("title" )).getText ();
-//                // String nazivProizvoda = e.findElement ( By.xpath ( "//div[@class='text-wrapper ']/div[@class='title']']" ) ).getText ();
-//                listaDobijenihProizvoda.add ( nazivProizvoda );
-//
- //              String vazecaCena = e.findElement ( By.xpath ( "//div[@class='item-data col-xs-12']//div[@class='prices-wrapper']" )).getText ();
-//                //String vazecaCena = e.findElement ( By.name ( "Važeća MP cena" )).getText ();
-//                String vazecaCena = e.findElement ( By.xpath ( "//div[@title='Važeća MP cena']" ) ).getText ();
-//                listaDobijenihProizvoda.add ( vazecaCena );
+                 //todo izvuci listu dobijenih artikala
 
 
 
- //               print ( "Vazeca cena za " + nazivProizvoda + "je " + vazecaCena  );
- //           }
-            List<WebElement> unsortedList = driver.findElements (By.className ( "wrapper-grid-view item product-item ease col-xs-6 col-sm-4 col-md-3 col-lg-3 grid-view   appeared" ));
-            ArrayList<String> unsortedArray = new ArrayList<> ();
-            for (WebElement e: unsortedList){
-                String itemName = e.findElement ( By.className ( "title" ) ).getText ();
-                unsortedArray.add ( itemName );
-                String price = e.findElement ( By.className ( "current-price " ) ).getText ();
-                print ( "Cena za " + itemName + "je " + price );
-            }
             searchPage.dropdownSortirajClick ();
             searchPage.dropdownSortirajNajjeftinijePrvoClick ();
 
         }finally {
-//            driver.quit ();
+            driver.quit ();
         }
     }
 
