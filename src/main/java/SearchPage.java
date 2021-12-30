@@ -1,8 +1,12 @@
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SearchPage extends BasePage{
     WebDriver driver = null;
@@ -44,6 +48,9 @@ public class SearchPage extends BasePage{
 
     @FindBy(xpath = "//select[@id='sort']//option[text()='Najjeftinije prvo']")
     WebElement dropdownSortirajNajjeftinijePrvo;
+
+    @FindBy(xpath = "//div[@class='block products-listing product product-listing-items ']")
+    WebElement rezultatSortiranja;
 
 
 
@@ -94,19 +101,6 @@ public class SearchPage extends BasePage{
         this.oznaciFilterCena3001Do3500 ();
     }
 
-    public void daLiJeHaljinaOznacena(){
-        print ( "daLiJeHaljinaOznacena" );
-        assert isElementPresent ( pretragaHaljinaOznacena ):"Error. Haljina nije produkt pretrage";
-
-    }
-    public void daLiJePolZenskiOznacen(){
-        waitForElement ( filterPolZenski );
-        print ( "daLiJePolZenskiOznacen" );
-        assert isElementPresent ( filterPolZenskiOznacen ):"Error. Pol zenski nije oznacen";
-
-
-    }
-
 
 
     public void daLiJePolZenskiOznacenUBlokTagu(){
@@ -129,6 +123,13 @@ public class SearchPage extends BasePage{
         assert isElementPresent ( pretragaFilterCena2501Do3000Oznacen ):"Error. Filter Cena 2501 do 3000 nije prikazan.";
     }
 
+    public void daLiSuSviFilteriOznaceniUBlokTagu(){
+        this.daLiJePolZenskiOznacenUBlokTagu ();
+        this.daLiJeHaljinaOznacenaUBlokTagu ();
+        this.daLiJeVelicina04UBlokTagu ();
+        this.daLiJeCena2501Do3000UBlokTagu ();
+    }
+
     public void dropdownSortirajClick(){
         assert isElementPresent ( dropdownSortiraj ):"Error. Dropdown menu is not present.";
         dropdownSortiraj.click ();
@@ -139,6 +140,31 @@ public class SearchPage extends BasePage{
         dropdownSortirajNajjeftinijePrvo.click ();
     }
 
+    public void searchAllProduct(){
+//        List<WebElement> rezultatPretrage = driver.findElements(By.xpath ( "//div[@class='block products-listing product product-listing-items ']" ) );
+//
+//        for( WebElement artikal : rezultatPretrage){
+//
+//            print (artikal.getText());
+
+//            String prviArtikalUNizu
+
+            ArrayList<String> sortedArray= new ArrayList<> ();
+            //Stampa posle sortiranja
+            List<WebElement> sortedList = driver.findElements(By.xpath ("//div[@class='block products-listing product product-listing-items ']"));
+            for(WebElement e : sortedList) {
+                String itemName = e.findElement(By.xpath ("//div[@class='product-shortname']")).getText();
+                sortedArray.add(itemName);
+                String price = e.findElement(By.xpath ("//div[@class='prices-wrapper']")).getText();
+                System.out.println("Cena za  " + itemName + " je " + price);
+            }
 
 
-}
+        }
+    }
+
+
+
+
+
+

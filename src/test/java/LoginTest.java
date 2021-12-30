@@ -168,6 +168,8 @@ public class LoginTest extends BaseTest{
      * 3. Kada se pojavi modal za prijavu, polje Email popuniti validnim podacima,
      * polje Lozinka popuniti nevalidnim podacima
      * 4. Kliknuti dugme PRIJAVA
+     *
+     * Expected result:
      * 5. verifikuj Error Alert: "Pogrešna email adresa ili lozinka. Molimo Vas pokušajte ponovo!"
      * 6. Klikni dugme Zaboravili ste lozinku i verifikuj da se modal pojavio
      *
@@ -197,7 +199,39 @@ public class LoginTest extends BaseTest{
             driver.quit ();
         }
     }
+    /**
+     * Prijava na stranicu sa nevalidnom Email adresom i validnom lozinkom
+     *
+     * Test steps:
+     * 1. Navigiraj na bebakids.com
+     * 2. U gornjem desnom delu headera klikni dugme PRIJAVITE SE
+     * 3. Kada se pojavi modal za prijavu, kliknuti polje Registrujte se
+     *
+     *
+     * Expected result:
+     * 5. verifikuj da se Registracioni modal pojavio
+     *
+     *
+     */
+    @Test
+    public void prelazakURegistracioniModalIzLoginForme() {
+        driver = openChromeDriver ();
+        try {
+            print ( "Navigiraj na bebakids.com" );
+            LoginPage loginPage = new LoginPage ( driver );
 
+            print ( "Klikni na polje Prijavi se na pocetnoj stranici" );
+            loginPage.prijaviteSeButtonClick ();
+            print ( "Klikni na polje Registrujte se u login modalu" );
+            loginPage.loginRegistracijaClick ();
+            print ( "Verifikuj da se registracioni modal pojavio" );
+            loginPage.daLiJeRegistracioniModalPrisutan ();
+
+
+        }finally {
+            driver.quit ();
+        }
+    }
 
 
 }
