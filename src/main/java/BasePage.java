@@ -8,6 +8,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BasePage {
     WebDriver driver=null;
@@ -38,6 +40,36 @@ public class BasePage {
 
      @FindBy(className = "login-btn")
      WebElement prijaviteSeButton;
+
+    // @FindBy(xpath = "//div[@class='img-wrapper']//img[@alt='Facebook']")
+     @FindBy(xpath = "//img[@alt='Facebook']")
+     WebElement povezimoSeFB;
+
+     @FindBy(xpath = "//a[@aria-label='Фејсбук']")
+     WebElement logoFB;
+
+     @FindBy(xpath = "//div[@class='bi6gxh9e aov4n071']/h2")
+     WebElement nazivNaFBStranici;
+
+     @FindBy(xpath = "//div[@class='aovydwv3 j83agx80 wkznzc2l dlu2gh78']")
+     WebElement slikaNaFBStranici;
+
+     @FindBy(xpath = "//img[@alt='YouTube']")
+     WebElement povezimoSeYouTube;
+
+     @FindBy(id = "logo-icon")
+     WebElement logoYouTube;
+
+     @FindBy(xpath = "//div[@class='b3onmgus hv4rvrfc byvelhso j83agx80 bp9cbjyn']")
+     WebElement prijaviSeFB;
+
+     @FindBy(xpath = "//img[@alt='Instagram']")
+     WebElement povezimoSeInstagram;
+
+     @FindBy(xpath = "//h1[text()='Instagram']")
+     WebElement naslovnaInstagram;
+
+
 
 
 
@@ -101,6 +133,45 @@ public class BasePage {
     public void clickLoginButton(){
         assert isElementPresent ( prijaviteSeButton ):"Error. Login Button is not present.";
         prijaviteSeButton.click ();
+    }
+    public void clickPoveZimoSeFB(){
+
+        assert isElementPresent ( povezimoSeFB ):"Error. Povezimo se nije prisutna opcija na stranici";
+        povezimoSeFB.click ();
+        List<String> tabs = new ArrayList(driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(1));
+        sleep ();
+
+        print ( "Verifikacija da je Facebook prijavi se prisutan na stranici" );
+        assert isElementPresent (prijaviSeFB ):"Error. Nisi na Facebook stranici. ";
+        driver.close();
+        driver.switchTo().window(tabs.get(0));
+
+
+    }
+
+    public void clickPovezimoSeYouTube(){
+        povezimoSeYouTube.click ();
+
+        List<String> tabs = new ArrayList(driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(1));
+
+        print ( "Verifikacija da je YouTube logo prisutan na stranici" );
+        assert isElementPresent (logoYouTube ):"Error. Nisi na YouTube stranici. ";
+        driver.close();
+        driver.switchTo().window(tabs.get(0));
+    }
+
+    public void clickPovezimoSeInstagram(){
+        povezimoSeInstagram.click ();
+        List<String> tabs = new ArrayList(driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(1));
+        sleep ();
+        print ( "Verifikacija da je Instagram naslov prisutan na stranici" );
+        assert isElementPresent (naslovnaInstagram ):"Error. Nisi na Instagram stranici. ";
+
+        driver.close();
+        driver.switchTo().window(tabs.get(0));
     }
 
 

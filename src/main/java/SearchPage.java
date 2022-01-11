@@ -49,6 +49,9 @@ public class SearchPage extends BasePage{
     @FindBy(xpath = "//select[@id='sort']//option[text()='Najjeftinije prvo']")
     WebElement dropdownSortirajNajjeftinijePrvo;
 
+    @FindBy(xpath = "//select[@id='sort']//option[text()='Po nazivu']")
+    WebElement dropdownSortirajPoNazivu;
+
     @FindBy(xpath = "//div[@class='block products-listing product product-listing-items ']")
     WebElement rezultatSortiranja;
 
@@ -138,6 +141,11 @@ public class SearchPage extends BasePage{
     public void dropdownSortirajNajjeftinijePrvoClick(){
         assert isElementPresent ( dropdownSortirajNajjeftinijePrvo ):"Error. Dropdown menu is not present.";
         dropdownSortirajNajjeftinijePrvo.click ();
+    }
+
+    public void dropdownSortirajPoNazivu(){
+        assert isElementPresent ( dropdownSortirajPoNazivu ):"Error. Dropdown menu is not present.";
+        dropdownSortirajPoNazivu.click ();
     }
 
     public void searchAllProduct(){
