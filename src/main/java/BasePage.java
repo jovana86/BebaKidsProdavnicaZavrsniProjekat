@@ -41,18 +41,8 @@ public class BasePage {
      @FindBy(className = "login-btn")
      WebElement prijaviteSeButton;
 
-    // @FindBy(xpath = "//div[@class='img-wrapper']//img[@alt='Facebook']")
      @FindBy(xpath = "//img[@alt='Facebook']")
      WebElement povezimoSeFB;
-
-     @FindBy(xpath = "//a[@aria-label='Фејсбук']")
-     WebElement logoFB;
-
-     @FindBy(xpath = "//div[@class='bi6gxh9e aov4n071']/h2")
-     WebElement nazivNaFBStranici;
-
-     @FindBy(xpath = "//div[@class='aovydwv3 j83agx80 wkznzc2l dlu2gh78']")
-     WebElement slikaNaFBStranici;
 
      @FindBy(xpath = "//img[@alt='YouTube']")
      WebElement povezimoSeYouTube;
@@ -69,13 +59,6 @@ public class BasePage {
      @FindBy(xpath = "//h1[text()='Instagram']")
      WebElement naslovnaInstagram;
 
-
-
-
-
-//Registration modal id = "registration_modal"
-    // poruka  class = alert alert-success get text
-    ////da se ugasi modal xpath = "form[@id='registration_modal']//button[@class='close']"
 
     //Konstruktor
 

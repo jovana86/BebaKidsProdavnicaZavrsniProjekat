@@ -78,7 +78,7 @@ public class SearchPage extends BasePage{
         JavascriptExecutor js1 = (JavascriptExecutor)driver;
         js1.executeScript("arguments[0].click();", filterVelicina4);
         sleep ();
-//        filterVelicina4.click ();
+
     }
     public void oznaciFilterCena1501Do2000(){
 
