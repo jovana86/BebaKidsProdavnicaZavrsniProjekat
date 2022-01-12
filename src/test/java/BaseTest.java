@@ -3,6 +3,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +11,8 @@ import java.util.List;
 public class BaseTest {
 
     WebDriver driver = null;
+
+
 
     //   Metoda za otvaranje Chrome drivera
 
