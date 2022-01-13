@@ -76,10 +76,14 @@ public class ShoppingPage extends BasePage{
 
     @FindBy(xpath = "//div[@id='order_cart_content']//h2/span")
     WebElement naslovUKorpi;
-    //*[@id="order_cart_content"]/div[1]/div[1]/div/h2/span
+
 
     @FindBy(xpath = "//div[@class='product-item-title text-left']")
     WebElement artikalUKorpi;
+
+    @FindBy(xpath = "//i[@class='icon fa fa-shopping-cart']")
+    WebElement korpa;
+
 
 
 
@@ -95,6 +99,7 @@ public class ShoppingPage extends BasePage{
         navigacionaListaObuca.click ();
         sleep ();
     }
+
 
     public void clickFilterVelicina25(){
         JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -128,6 +133,11 @@ public class ShoppingPage extends BasePage{
         assert isElementPresent ( dodajUKorpu ):"Error. Dodaj u korpu button se ne prikazuje.";
         dodajUKorpu.click ();
     }
+    public void clickKorpa(){
+        assert isElementPresent ( korpa ):"Error";
+        korpa.click ();
+    }
+
     public void clickIkonicaKorpa(){
         assert isElementPresent ( ikonicaKorpa ):"Error. Ikonica korpa se ne prikazuje.";
 
