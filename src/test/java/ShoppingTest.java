@@ -14,15 +14,16 @@ public class ShoppingTest extends BaseTest{
      * 2. U navigacionom meniju u header delu stranice odaberi opciju Obuca i klikni
      * 3. Filtriraj rezultat u meniju sa leve strane: velicina 25, brend Naturino i pol Zenski
      * 4. Klik na odabrane cipele, potom markiraj velicinu 25 i dodaj u korpu
-     * 5. Udji u korpu i proveri da li je zeljeni artikal u korpi
+     * 5. Udji u korpu
      * 6. Prijavi se kao postojeci korisnik iz korpe
      * 7. Odaberi opciju placanje karticom
      *
      *
      * Expected results
-     * 3. Verifikuj da su odabrani filteri u blok tagu //todo
-     * 5. Verifikuj da se broj artikala na ikonici korpa promenio u 1
-     * 5. Verifikuj da je zeljeni artikal isti kao onaj koji smo uneli u korpu //todo
+     * 3. Verifikuj da su odabrani filteri u blok tagu
+     * 5a. Verifikuj da je broj artikala na ikonici korpa 1
+     * 5b. Verifikuj da si na stranici Kupovina
+     * 5c. Verifikuj da je zeljeni artikal isti kao onaj koji smo uneli u korpu
      * 8. Verifikuj da je prisutno dugme potvrdi kupovinu
      */
 
@@ -44,7 +45,10 @@ public class ShoppingTest extends BaseTest{
             SearchPage searchPage=new SearchPage ( driver );
             searchPage.oznaciFilterPolZenski ();
 
-            print ( "Klikni ns zeljene cipele, potom markiraj velicinu 25 i dodaj artikal u korpu" );
+            print ( "Verifikuj da su odabrani filteri prisutni u blok tagu" );
+            shoppingPage.daLiSuOznaceniFilteriPrisutniUBlokTagu ();
+
+            print ( "Klikni na zeljene cipele, potom markiraj velicinu 25 i dodaj artikal u korpu" );
             shoppingPage.clickOdabraneCipele ();
             shoppingPage.clickOdrediVelicinu25 ();
             shoppingPage.clickDodajUKorpu ();
@@ -54,11 +58,13 @@ public class ShoppingTest extends BaseTest{
             String brojArtikalaUKorpi = shoppingPage.getBrojNaIkoniciKorpa ();
             assert brojArtikalaUKorpi.equals("1") : "Error. Broj artikala u korpi nije odgovarajuci.";
 
-            print ( "Klikni na ikonicu korpa i verifikuj da je u njoj odabrani artikal" );
+            print ( "Klikni na ikonicu korpa i verifikuj da je u njoj odabrani artikal i da si na stranici Kupovina" );
             shoppingPage.clickIkonicaKorpa ();
             shoppingPage.sleep ();
 
-            shoppingPage.getItemNames ();
+            shoppingPage.daLiSamNaStraniciKupovina ();
+            shoppingPage.daLiJeZeljeniArtikalUKorpi ();
+            shoppingPage.listaArtikalaUKorpi ();
 
             print ( "U korpi izaberi opciju prijava i prijavi se kao postojeci korisnik" );
             shoppingPage.clickPrijavaKorisnikaUKorpi ();
@@ -71,20 +77,8 @@ public class ShoppingTest extends BaseTest{
             shoppingPage.daLiJeDugmePotvrdiKupovinuPrisutno ();
 
 
-
-
-
-
-
-            //todo uradi asertaciju da se artikal sa tim nazivom nalazi u korpi i ispisi test case i prints
-
-            //todo iskoristi ovaj princip za search test
-
-
-
-
         }finally {
-           // driver.quit ();
+            driver.quit ();
         }
     }
 

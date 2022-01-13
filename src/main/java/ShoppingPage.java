@@ -65,6 +65,22 @@ public class ShoppingPage extends BasePage{
     @FindBy(xpath = "//button[@id='submit_order_one_page']")
     WebElement potvrdiKupovinu;
 
+    @FindBy(xpath = "//div[text()='zenski ']")
+    WebElement filterZenskiPolPrisutan;
+
+    @FindBy(xpath = "//div[text()='naturino ']")
+    WebElement filterBrendNaturinoPrisutan;
+
+    @FindBy(xpath = "//div[text()='25']")
+    WebElement filterVelicina25Prisutan;
+
+    @FindBy(xpath = "//div[@id='order_cart_content']//h2/span")
+    WebElement naslovUKorpi;
+    //*[@id="order_cart_content"]/div[1]/div[1]/div/h2/span
+
+    @FindBy(xpath = "//div[@class='product-item-title text-left']")
+    WebElement artikalUKorpi;
+
 
 
     //Konstruktor
@@ -127,21 +143,25 @@ public class ShoppingPage extends BasePage{
         return brojNaIkoniciKorpa.getText();
     }
 
-    public void  getItemNames() {
+    public void  listaArtikalaUKorpi() {
         List<WebElement> rowsList = tabelaUKorpi.findElements ( By.tagName ("tr"  ));
 
         List<WebElement> columnsList = null;
-
         for (WebElement row : rowsList) {
             System.out.println();
             columnsList = row.findElements(By.className ("cart-product"));
            // columnsList = row.findElements(By.tagName("td"));
-
             for (WebElement column : columnsList) {
-                print (column.getText() + ",");
+
+                print ( column.getText () + ",");
+                print ( "----------------------------------------" );
+
             }
         }
-        //todo uradi asertaciju
+
+
+
+
     }
     public void clickPrijavaKorisnikaUKorpi(){
         JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -154,17 +174,20 @@ public class ShoppingPage extends BasePage{
 
     }
     public void unesiLoginEmailUKorpi(){
+        print ( "Unesi validan Email za prijavu u Korpi" );
         assert isElementPresent ( loginEmailUKorpi ):"Error. Login Modal u korpi is not open.";
         loginEmailUKorpi.click ();
         loginEmailUKorpi.sendKeys ( Strings.LOGIN_EMAIL );
     }
     public void unesiLoginLozinkaUKorpi(){
+        print ( "Unesi Validnu lozinku za prijavu u korpi" );
         assert isElementPresent ( loginLozinkaUKorpi ):"Error. Login Modal u korpi is not open.";
         loginLozinkaUKorpi.click ();
         loginLozinkaUKorpi.sendKeys ( Strings.LOGIN_LOZINKA );
     }
 
     public void clickPrijavaUKorpi(){
+        print ( "Klikni na dugme Prijava" );
         assert isElementPresent ( prijavaUKorpi ):"Error. Login Modal u korpi is not open.";
         prijavaUKorpi.click ();
     }
@@ -188,6 +211,30 @@ public class ShoppingPage extends BasePage{
 
         assert isElementPresent ( potvrdiKupovinu ):"Error. Dugme Potvrdi kupovinu nije prisutno na stranici.";
     }
+
+    public void daLiSuOznaceniFilteriPrisutniUBlokTagu(){
+        print ( "Da li se filter Pol zenski pojavljuje u blok tagu" );
+        assert isElementPresent ( filterZenskiPolPrisutan ):"Error. Filter pol Zenski se ne prikazuje u blok tagu.";
+        print ( "Da li se filter Brend Naturino pojavljuje u blok tagu" );
+        assert isElementPresent ( filterBrendNaturinoPrisutan ):"Error. Filter Brend Naturino se ne prikazuje u blok tagu.";
+        print ( "Da li se filter velicina 25 pojavljuje u blok tagu" );
+        assert isElementPresent ( filterVelicina25Prisutan ):"Error. Filter velicina 25 se ne prikazuje u blok tagu.";
+    }
+
+    public void daLiSamNaStraniciKupovina(){
+        print ( "Da li si na stranici Kupovina" );
+        String currentURL = driver.getCurrentUrl();
+        assert currentURL.contains("kupovina") : "Error. Pogresan URL. Ocekivano je da si na stranici kupovina, ali si na " + currentURL;
+    }
+
+    public void daLiJeZeljeniArtikalUKorpi(){
+
+        print ( "Da li je zeljeni artikal u korpi" );
+        String nazivArtiklaUKorpi = artikalUKorpi.getText();
+        assert nazivArtiklaUKorpi.contains("CIPELE ZA DEVOJČICE FALCOTTO") : "Error. Zeljeni artikal nije u korpi.";
+
+    }
+
 
 
 }
